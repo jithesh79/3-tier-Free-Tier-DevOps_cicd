@@ -1,0 +1,4 @@
+- name: Copy SQLite DB
+  copy:
+    src: "{{ playbook_dir }}/../../db/database.db"
+    dest: "/home/ec2-user/database.db"
