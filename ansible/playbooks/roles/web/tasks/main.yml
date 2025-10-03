@@ -1,0 +1,9 @@
+- name: Run Web container (Nginx)
+  docker_container:
+    name: web
+    image: nginx:alpine
+    state: started
+    ports:
+      - "80:80"
+    volumes:
+      - "{{ playbook_dir }}/../../web:/usr/share/nginx/html"
