@@ -1,0 +1,15 @@
+pipeline {
+    agent any
+    stages {
+        stage('Checkout') { steps { git 'https://github.com/<your-username>/3tier-devops-free-tier.git' } }
+        stage('Build App Docker') { steps { sh 'docker build -t app-tier ./app' } }
+        stage('Deploy Web') { steps { sh 'docker run -d --name web -p 80:80 -v $(pwd)/web:/usr/share/nginx/html nginx:alpine' } }
+        stage('Deploy App') { steps { sh 'docker run -d --name app -p 5000:5000 app-tier' } }
+        stage('Deploy K3s') { steps { sh 'kubectl apply -f k8s/' } }
+        stage('Deploy ArgoCD / SonarQube / Nexus') {
+            steps {
+                sh 'docker start argocd sonarqube nexus || true'
+            }
+        }
+    }
+}
