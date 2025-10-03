@@ -1,0 +1,8 @@
+- name: Run ArgoCD container
+  docker_container:
+    name: argocd
+    image: argoproj/argocd:v2.8.3
+    state: started
+    restart_policy: always
+    ports:
+      - "8081:8080"
