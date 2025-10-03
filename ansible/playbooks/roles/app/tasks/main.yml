@@ -1,0 +1,13 @@
+- name: Build App Docker image
+  docker_image:
+    path: "{{ playbook_dir }}/../../app"
+    name: app-tier
+    tag: latest
+
+- name: Run App container
+  docker_container:
+    name: app
+    image: app-tier:latest
+    state: started
+    ports:
+      - "5000:5000"
