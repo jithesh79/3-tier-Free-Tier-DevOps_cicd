@@ -1,0 +1,8 @@
+- name: Update & install common packages
+  yum:
+    name:
+      - git
+      - wget
+      - curl
+      - vim
+    state: latest
