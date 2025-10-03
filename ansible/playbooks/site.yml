@@ -1,0 +1,13 @@
+- hosts: ec2
+  become: true
+  roles:
+    - common
+    - docker
+    - jenkins
+    - k3s
+    - sonarqube
+    - nexus
+    - argocd
+    - web
+    - app
+    - db
